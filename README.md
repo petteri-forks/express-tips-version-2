@@ -11,21 +11,36 @@ It contains the actual tips files and the script. Both are deployed to remote ho
 
 ## TotD version 2 instructions
 
+install dependencies in the nodeapp folder with command
+````
+npm install
+````
 create .env file in the nodeapp folder with values:
+
+````
 DB_PORT=5432
 DB_HOST=localhost
 POSTGRES_USER=user
 POSTGRES_PASSWORD=password
 POSTGRES_DB=tips
+````
+to run the database in docker container run the following command in the root directory of the project
+````
+docker compose up
+````
+add data to the database by navigating to nodeapp/scrips and run command
+````
+node add_data_to_db.js
+````
+to start webserver run following command in the nodeapp folder
+````
+node app.js
+````
 
-run "docker compose up" in the root directory of project
-navigate to nodeapp/scrips
-run "node add_data_to_db.js"
-
-in the nodeapp folder run "node app.js" to start webserver
 
 endpoints
 
+````
 Get all tips (GET)
 http://localhost:3000/getall
 
@@ -43,7 +58,7 @@ http://localhost:3000/:tid/plain
 
 Add new tip (POST)
 http://localhost:3000/addtip
-
+````
 
 # Links and References
 
