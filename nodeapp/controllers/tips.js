@@ -23,6 +23,11 @@ const getTipById = async (req, res, next) => {
 const getTipByIdPlainText = async (req, res, next) => {
   const tipId = req.params.tid;
   console.log(tipId)
+  if (tipId < 1) {
+    const error = new Error(`Tip ID must be higher than 0`);
+    error.statusCode = 404;
+    return next(error);
+  }
 
   const fetchData = async (id) => {
     const tip = await findTipById(id);

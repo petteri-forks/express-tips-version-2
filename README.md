@@ -60,6 +60,23 @@ Add new tip (POST)
 http://localhost:3000/addtip
 ````
 
+# Postman screenshots
+
+<div align="center">
+    <p>Get tip by Id endpoint </p>
+    <img src="/screenshots/getbyid_endpoint.png" width="600px"</img>
+    <p>Get tip by Id plain text endpoint</p>
+    <img src="/screenshots/getbyidplaintext_endpoint.png" width="600px"</img>
+    <p>Delete tip by Id endpoint</p>
+    <img src="/screenshots/deletetipbyid_endpoint.png" width="600px"</img>
+    <p>Update tip by Id endpoint</p>
+    <img src="/screenshots/updatetipbyid_endpoint.png" width="600px"</img>
+    <p>Get all tips</p>
+    <img src="/screenshots/getall_endpoint.png" width="600px"</img>
+    <p>Add new tip</p>
+    <img src="/screenshots/addnewtip_endpoint.png" width="600px"</img>
+</div>
+
 # Links and References
 
 * https://docs.gitlab.com/ee/ci/pipelines/
