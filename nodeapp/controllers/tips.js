@@ -22,7 +22,7 @@ const getTipById = async (req, res, next) => {
 
 const getTipByIdPlainText = async (req, res, next) => {
   const tipId = req.params.tid;
-  console.log(tipId)
+  // console.log(tipId)
   if (tipId < 1) {
     const error = new Error(`Tip ID must be higher than 0`);
     error.statusCode = 404;
@@ -31,12 +31,14 @@ const getTipByIdPlainText = async (req, res, next) => {
 
   const fetchData = async (id) => {
     const tip = await findTipById(id);
-    console.log(tip)
+    // console.log(tip)
 
     if (!tip) {
       const newId = Math.floor(Math.random() * 100) + 1;
-      const remainder = tipId % newId;
-      fetchData(remainder);
+      const newId2 = Math.floor(Math.random() * 100) + 1;
+      const remainder = newId % newId2;
+      // console.log(remainder)
+      fetchData(remainder)
     } else {
       res.send(tip.description);
     }
