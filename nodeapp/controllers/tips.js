@@ -1,4 +1,5 @@
 import { getAllTips, findTipById, addTip, updateTipWithId, deleteTipWithId } from "../models/tips.js";
+import { validationResult } from "express-validator";
 
 const getTips = async (req, res, next) => {
   const tips = await getAllTips();
@@ -47,6 +48,12 @@ const getTipByIdPlainText = async (req, res, next) => {
 };
 
 const addNewTip = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error(`Invalid values given check the data`);
+    error.statusCode = 400;
+    return next(error);
+  }
 
   const { description } = req.body;
   // console.log(req.body)
@@ -69,6 +76,12 @@ const addNewTip = async (req, res, next) => {
 };
 
 const updateTipById = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error(`Invalid values given check the data`);
+    error.statusCode = 400;
+    return next(error);
+  }
 
   const { description } = req.body;
   const tipId = req.params.tid;

@@ -1,6 +1,7 @@
 import { getTips, deleteTipById, updateTipById, getTipById, addNewTip, getTipByIdPlainText } from './controllers/tips.js';
 import express from "express";
 import bodyParser from "body-parser";
+import { check } from "express-validator";
 // const express = require('express')
 const app = express()
 const port = 3000
@@ -58,11 +59,23 @@ app.get('/api/*', (req, res) => {
 
 app.get("/getall", getTips);
 app.delete("/:tid/delete", deleteTipById);
-app.patch("/:tid/update", updateTipById);
+app.patch(
+  "/:tid/update",
+  [
+    check("description")
+      .notEmpty()
+  ],
+  updateTipById
+);
 app.get("/:tid", getTipById);
 app.get("/:tid/plain", getTipByIdPlainText);
-app.post("/addtip", addNewTip);
-
+app.post(
+  "/addtip",
+  [
+    check("description").notEmpty()
+  ],
+  addNewTip
+);
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)
