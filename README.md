@@ -53,8 +53,14 @@ http://localhost:3000/:tid/update
 Get tip by Id (GET)
 http://localhost:3000/:tid
 
+Get random tip by Id as plain text (GET) and can use any positive integer number as :tid value to fetch tip
+http://localhost:3000/randomplain/:tid
+
 Get tip by Id as plain text (GET) and can use any positive integer number as :tid value to fetch tip
-http://localhost:3000/:tid/plain
+http://localhost:3000/plain/:tid
+
+Get number of tips
+http://localhost:3000/nrtips
 
 Add new tip (POST)
 http://localhost:3000/addtip

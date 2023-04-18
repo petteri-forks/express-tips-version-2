@@ -18,6 +18,12 @@ const getAllTips = async () => {
   return tips.rows;
 };
 
+const getAllTipIds = async () => {
+  const tips = await pool.query("SELECT id FROM tips ORDER BY id");
+  console.log(tips)
+  return tips.rows;
+};
+
 const findTipById = async (id) => {
   const tip = await pool.query("SELECT * FROM tips WHERE id=$1", [id]);
   return tip.rows[0];
@@ -46,4 +52,4 @@ const deleteTipWithId = async (id) => {
   return result.rowCount !== 0;
 };
 
-export { getAllTips, findTipById, addTip, updateTipWithId, deleteTipWithId, };
+export { getAllTips, findTipById, addTip, updateTipWithId, deleteTipWithId, getAllTipIds };

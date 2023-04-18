@@ -1,4 +1,4 @@
-import { getTips, deleteTipById, updateTipById, getTipById, addNewTip, getTipByIdPlainText } from './controllers/tips.js';
+import { getTips, deleteTipById, updateTipById, getTipById, addNewTip, getTipByIdPlainText, getRobined, getNrTips } from './controllers/tips.js';
 import express from "express";
 import bodyParser from "body-parser";
 import { check } from "express-validator";
@@ -58,7 +58,11 @@ app.get('/api/*', (req, res) => {
 // version 2 below
 
 app.get("/getall", getTips);
-app.delete("/:tid/delete", deleteTipById);
+app.get("/nrtips", getNrTips);
+app.get("/plain/:tid", getRobined);
+app.get("/plain", getRobined);
+app.delete("/:tid/delete", deleteTipById); 
+
 app.patch(
   "/:tid/update",
   [
@@ -68,7 +72,8 @@ app.patch(
   updateTipById
 );
 app.get("/:tid", getTipById);
-app.get("/:tid/plain", getTipByIdPlainText);
+app.get("/randomplain/:tid", getTipByIdPlainText);
+
 app.post(
   "/addtip",
   [

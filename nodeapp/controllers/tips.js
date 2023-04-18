@@ -1,4 +1,4 @@
-import { getAllTips, findTipById, addTip, updateTipWithId, deleteTipWithId } from "../models/tips.js";
+import { getAllTips, findTipById, addTip, updateTipWithId, deleteTipWithId, getAllTipIds } from "../models/tips.js";
 import { validationResult } from "express-validator";
 
 const getTips = async (req, res, next) => {
@@ -7,8 +7,12 @@ const getTips = async (req, res, next) => {
   res.json({ tips });
 };
 
-const getTipById = async (req, res, next) => {
-  const tipId = req.params.tid;
+const getTipById = async (req, res, next) => { 
+  let tipId = parseInt(req.params.tid)
+  if (!tipId) {
+    tipId = 1;
+  }
+
   // console.log(tipId)
   const tip = await findTipById(tipId);
 
@@ -18,8 +22,42 @@ const getTipById = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ tip });
+  res.json({ tip }); 
 };
+
+
+const getNrTips = async (req, res, next) => {
+  const tips = await getAllTipIds()
+  res.send(tips.length.toString())
+}
+
+const getRobined = async (req, res, next) => { 
+  let tipId = parseInt(req.params.tid)
+  let tmpList = Array()
+  const tips = await getAllTipIds()
+
+  tips.forEach(function(value, key) {
+    // console.log(key + " = " + value.id)
+    tmpList.push(value.id)
+  })
+  let nrTips = tmpList.length
+
+  if (! tipId) {
+    // console.log("Id not integer: " + tipId)
+    tipId = Math.floor(Math.random() * 9999) + 1
+  }
+  
+  const nextId = tmpList[tipId % nrTips]  
+  const tip = await findTipById(nextId);
+  if (!tip) {
+    const error = new Error(`Tip with ID ${tipId} not found`);
+    error.statusCode = 404;
+    return next(error);
+  }
+
+  res.send(tip.description)
+}
+
 
 const getTipByIdPlainText = async (req, res, next) => {
   const tipId = req.params.tid;
@@ -111,7 +149,7 @@ const updateTipById = async (req, res, next) => {
 
 const deleteTipById = async (req, res, next) => {
   const tipId = req.params.tid;
-  // console.log(tipId)
+  console.log("Delete by ID: " + tipId)
   const tip = await findTipById(tipId);
   // console.log(tip)
   if (!tip) {
@@ -135,5 +173,7 @@ export {
   updateTipById,
   getTipById,
   addNewTip,
-  getTipByIdPlainText
+  getTipByIdPlainText,
+  getRobined,
+  getNrTips
 };
