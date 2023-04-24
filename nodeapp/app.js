@@ -3,8 +3,11 @@ import express from "express";
 import bodyParser from "body-parser";
 import { check } from "express-validator";
 // const express = require('express')
+import * as dotenv from "dotenv";
+dotenv.config({});
+
 const app = express()
-const port = 3000
+const port = process.env.NODE_PORT
 // var dt = require('./modules/totd.js')
 
 

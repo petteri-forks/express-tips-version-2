@@ -13,3 +13,20 @@ services:
     restart: always
     volumes:
       - ./data:/var/lib/postgresql/data
+  nodeapp:
+    build:
+      dockerfile: Dockerfile
+      context: ./nodeapp
+    ports:
+      - "3432:3432"
+    volumes:
+      - /app/node_modules
+      - ./nodeapp:/app
+    environment:
+      - DB_PORT=5432
+      - DB_HOST=db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tips 
+      - NODE_PORT=3432
+
