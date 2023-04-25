@@ -1,68 +1,85 @@
 # Introduction
 
-This project contains some sample GitLab CI/CD pipelines that demonstrate different CI/CD features.
+This application is the db-based version of the Tip of the Day (TotD) application. The applications's basic use is for storing and displaying short flascards in command line for self learning. Each time user logs in to Linux command line, new tip of the day is displayed. The application here is the API service for delivering the data through HTTP/REST. This application contains also methods for updating the data.
 
-# Samples
+# Installation
 
-## TotD
+There are different approaches for installing and runnng the application.
+Here is described the fully dockerized style.
 
-Tip of the Day service contains a script to be run with every login to a bash environment - linux server, WSL, etc.
-It contains the actual tips files and the script. Both are deployed to remote hosts, either for user specific or host wide use. The pipeline build the service by "compiling" the tips files to simple enumerated versions, tests the script and deploys it to remote server.
+## Docker version
 
-## TotD version 2 instructions
+### Prerequisites
 
-install dependencies in the nodeapp folder with command
-````
-npm install
-````
-create .env file in the nodeapp folder with values:
+Docker and docker-compose installed to the system.
 
+### Steps
+
+* Clone the project
+* verify the values in docker-compose.yml are valid in your environment. 
+  * Credentials can be changed for better security
+  * Listening ports can be changed to avoid conflicts
+* Start containers
+* Run the initialization script for preloading some sample tips to the service
+
+### Commands
+
+Starting docker containers:
 ````
-DB_PORT=5432
-DB_HOST=localhost
-POSTGRES_USER=user
-POSTGRES_PASSWORD=password
-POSTGRES_DB=tips
+docker compose up -d
 ````
-to run the database in docker container run the following command in the root directory of the project
+NOTE: run the command in the directory where the docker-compose.yml file resides.
+
+Stopping containers:
 ````
-docker compose up
+docker compose down
 ````
-add data to the database by navigating to nodeapp/scrips and run command
+
+Add sample data to the database by navigating to nodeapp/scrips and run command
 ````
 node add_data_to_db.js
 ````
-to start webserver run following command in the nodeapp folder
-````
-node app.js
-````
 
+# Try out - endpoints
 
-endpoints
+## Read endpoints
 
-````
-Get all tips (GET)
-http://localhost:3000/getall
-
-Delete tip by Id (DELETE)
-http://localhost:3000/:tid/delete
-
-Update tip by Id (PATCH)
-http://localhost:3000/:tid/update
-
-Get tip by Id (GET)
-http://localhost:3000/:tid
-
-Get random tip by Id as plain text (GET) and can use any positive integer number as :tid value to fetch tip
-http://localhost:3000/randomplain/:tid
+Note some services provide plain text respose, some JSON data.
+For the TotD Bash client the plain text endpoints are the most convenient to use.
 
 Get tip by Id as plain text (GET) and can use any positive integer number as :tid value to fetch tip
+````
 http://localhost:3000/plain/:tid
-
+````
+Get all tips (GET)
+````
+http://localhost:3000/getall
+````
+Get tip by Id (GET)
+````
+http://localhost:3000/:tid
+````
+Get random tip by Id as plain text (GET) and can use any positive integer number as :tid value to fetch tip
+````
+http://localhost:3000/randomplain/:tid
+````
 Get number of tips
+````
 http://localhost:3000/nrtips
+````
 
+## Update endpoints
+
+Delete tip by Id (DELETE)
+````
+http://localhost:3000/:tid/delete
+````
+Update tip by Id (PATCH)
+````
+http://localhost:3000/:tid/update
+````
 Add new tip (POST)
+````
 http://localhost:3000/addtip
 ````
 
