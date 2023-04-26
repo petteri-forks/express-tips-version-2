@@ -109,11 +109,7 @@ http://localhost:3000/addtip
     <img src="/screenshots/addnewtip_endpoint.png" width="600px"</img>
 </div>
 
-# Links and References
 
-* https://docs.gitlab.com/ee/ci/pipelines/
-* https://docs.gitlab.com/ee/ci/ssh_keys/
-* https://www.udemy.com/course/gitlab-ci-pipelines-ci-cd-and-devops-for-beginners/
 
 
 
