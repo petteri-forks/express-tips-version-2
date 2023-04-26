@@ -1,6 +1,6 @@
 import pg from "pg";
 import * as dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: ".env" });
 
 const devCon = {
   database: process.env.POSTGRES_DB,

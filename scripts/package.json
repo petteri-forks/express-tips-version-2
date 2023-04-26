@@ -1,0 +1,15 @@
+{
+  "name": "totdscript",
+  "version": "2.0.0",
+  "description": "DB Init Script for TotD",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "N.N",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "pg": "^8.10.0"
+  }
+}

@@ -35,7 +35,16 @@ Stopping containers:
 docker compose down
 ````
 
-Add sample data to the database by navigating to nodeapp/scrips and run command
+# Add sample data to the database 
+
+If you want to populate the DB with sample tips snippets:
+
+Navigate to scripts and run command
+````
+npm install
+````
+
+Create .env file and verify it contains correct DB credentials and run
 ````
 node add_data_to_db.js
 ````
